@@ -140,3 +140,29 @@ static uint8_t spi_readwrite(const uint8_t aci_byte)
     rx_data=SPI.transfer(10,tx_data,SPI_LAST); 
     return rx_data;
 }
+//alternatively place corrected code from SPI.transfer here
+/*
+	uint32_t ch = BOARD_PIN_TO_SPI_CHANNEL(10);
+	// Reverse bit order
+	if (bitOrder[ch] == LSBFIRST)
+		tx_data = __REV(__RBIT(tx_data));
+	uint32_t d = tx_data | SPI_PCS(ch);
+	if (_mode == SPI_LAST)
+		d |= SPI_TDR_LASTXFER;
+
+	// SPI_Write(spi, _channel, _data);
+    while ((spi->SPI_SR & SPI_SR_TDRE) == 0)
+    	;
+    spi->SPI_TDR = d;
+
+    // return SPI_Read(spi);
+    while ((spi->SPI_SR & SPI_SR_RDRF) == 0)
+    	;
+    d = spi->SPI_RDR;
+    rx_data=d & 0xFF;
+	// Reverse bit order
+	if (bitOrder[ch] == LSBFIRST)
+		rx_data = __REV(__RBIT(rx_data));
+    return rx_data;
+}
+*/
