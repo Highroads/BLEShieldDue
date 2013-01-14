@@ -36,19 +36,19 @@ void hal_aci_tl_io_config()
 
 void hal_aci_tl_init()
 {
-  Serial.println("start hal_aci_tl_init");
+//  Serial.println("start hal_aci_tl_init");
   received_data.buffer[0] = 0;
 
   digitalWrite(HAL_IO_RADIO_REQN, HIGH);
 
   spi_transmit_requested = false;
   data_to_send.buffer[0] = 0;
-  Serial.println("start hal_aci_tl_init");
+//  Serial.println("start hal_aci_tl_init");
 }
 
 bool hal_aci_tl_send(hal_aci_data_t *p_aci_cmd)
 {
-  Serial.println("start hal_aci_tl_send");
+//  Serial.println("start hal_aci_tl_send");
   uint8_t length = p_aci_cmd->buffer[0];
   if (!spi_transmit_requested)
   {
